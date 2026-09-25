@@ -1,5 +1,6 @@
 package com.dsa.task_23_09_2026;
 
+
 class Payment {
 
 	void hello() {
@@ -51,5 +52,15 @@ public class Main {
 
 		p = new NetBanking();
 		p.pay();
+		
+		
+		// ClassCasteException - Cannot down cast the parent
+		/*
+		 * Payment p1; 
+		 * p1 = new Payment(); 
+		 * Payment u = (UPI) p1; 
+		 * u.hello();
+		 */
+				
 	}
 }
