@@ -71,3 +71,26 @@ where grd.empno>0;
  call invalidSal();
  select * from emp_grade;
  
+ -- 2. Create trigger to prevent duplicate employee names
+ delimiter $$
+ drop trigger if exists duplicateEmp $$
+ create trigger duplicateEmp 
+ before insert
+ on emp
+ for each row
+ begin
+ if exists (select 1 from emp where ename = new.ename) then
+ signal sqlstate '45000'
+ set message_text= "Employee already exists";
+ end if;
+ end
+ $$
+ select * from emp;
+ insert into emp values(36999,'SMITH','CLERK',7902,'1980-12-17',1000,0 ,30);
+ 
+ SHOW TRIGGERS LIKE 'emp';
+ 
+ SHOW VARIABLES LIKE 'log_bin_trust_function_creators';
+ SET GLOBAL log_bin_trust_function_creators = 1;
+ 
+ 
