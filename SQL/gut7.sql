@@ -1,57 +1,32 @@
-]
 /*
- * *Day - 16*
-*Java*
-1. Given a sentence, find the longest word.
-Example:
-Input:
-str = "In Vcube, Java is simple"
-Output:
-Developer
-Constraint:
-Ignore punctuation & Symbols
+PLSQL
+1. Create procedure to compare current and previous salary trends
 
-2. Count substrings having equal consecutive 0s and 1s. All 0s are grouped together and all 1s are grouped together 
-Example:
-Input:
-00110011
-Output:
-6
-*PLSQL*
-1. Create a procedure to generate monthly employee analytics.
-
-2. Create autonomous transaction trigger for logging
-(MySQL doesn't support Oracle autonomous transactions directly.)
-Workaround:
-Use separate logging table.
-Logging still rolls back with transaction in MySQL.
-
+2. Create procedure for department-wise ranking generation
 *JavaScript*
-1. Write a JavaScript program to reverse a string.
-Input: hello
- Output: olleh
+1. Write a JavaScript program to check whether a string is a palindrome.
+Input: madam
+Output: Palindrome
  */
  
- -- 1. Create a procedure to generate monthly employee analytics.
+ delimiter $$
+drop procedure if exists newP $$
+create procedure newP()
+begin
+declare oldsal decimal(10,2) ;
+declare newsal decimal(10,2);
 
-	use gut;
-    delimiter $$
-    drop procedure if exists generateM $$
-    create procedure generateM( in mon int )
-    begin 
-    select mon as month_number,
-    count(*) as total_employees,
-    sum(sal) as total_salary,
-    avg(sal) as average_salary,
-    min(sal) as minimum_salary,
-    max(sal) as maximum_salary
-    from emp
-    where month(hiredate) = mon;
-    end
-    
-    $$
+select sal  into oldsal from sal_audit;
+select sal into newsal from emp;
 
-call generateM(06);
-
--- 2. Create autonomous transaction trigger for logging
- 
+if oldsal is null then
+select 'old salary is unvailable';
+elseif newsal > oldsal then
+select 'salary is increased';
+elseif oldsal> newsal then
+select 'salary decreased';
+else 
+select newsal, oldsal, 'salary is unchanges';
+end if;
+end
+ $$
