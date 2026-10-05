@@ -30,3 +30,31 @@ select newsal, oldsal, 'salary is unchanges';
 end if;
 end
  $$
+ 
+ -- 2.Create procedure for department-wise ranking generation
+ delimiter $$
+ drop procedure if exists rankingDep $$
+ create procedure rankingDep()
+ begin
+ with res as (select d.deptno, d.dname,d.loc ,sum(sal) as totsal from emp e join dept d on e.deptno = d.deptno group by d.deptno, d.dname,d.loc
+ )
+ select *,rank()over(order by totsal desc) from res;
+ end
+ 
+ $$
+ 
+ -- sol 2 
+ delimiter $$
+ drop procedure if exists rankingDep $$
+ create procedure rankingDep()
+  begin
+  select
+  empno,
+  ename,
+  deptno,
+  sal,
+  rank() over(partition by deptno order by sal desc) as salary_rank
+    from emp
+    order by deptno;
+    end
+    $$
