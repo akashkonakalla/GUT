@@ -1,6 +1,5 @@
-package com.dsa.task_5_10_2026;
+package com.dsa.task_05_10_2026;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 /*
