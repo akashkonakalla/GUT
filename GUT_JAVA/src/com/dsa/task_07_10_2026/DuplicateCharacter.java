@@ -5,13 +5,7 @@ import java.util.HashMap;
  * *Day - 19*
 *Java*
 1. Generate all subsequences of a string.
-Example:
-Input:
-ABC
-Output:
-"",A,B,C,AB,AC,BC,ABC
-
-2. Given a string, print all duplicate characters.
+Example: a string, print all duplicate characters.
 Example:
 Input:
 str = "programming"
@@ -34,7 +28,7 @@ Input: hello
  */
 import java.util.Scanner;
 
-public class DeplicateCharacter {
+public class DuplicateCharacter {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter the string");
