@@ -64,7 +64,11 @@ public class CommonElements {
 
 		}
 
-		System.out.println("All the common elements in the 3 arrays are : " + set);
+		if (set.isEmpty()) {
+			System.out.println("No common elements found.");
+		} else {
+			System.out.println("Common elements: " + set);
+		}
 
 	}
 
